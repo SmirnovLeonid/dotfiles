@@ -5,7 +5,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CURRENT_DESKTOP="gnome"
 
 export HDD="/media/hdd"
-export APP_DATA="$HDD/arch/app-data"
+export APP_DATA="$HOME/arch/app-data"
 
 export TERMINAL=$(which xterm)
 export BROWSER=$(which firefox)
