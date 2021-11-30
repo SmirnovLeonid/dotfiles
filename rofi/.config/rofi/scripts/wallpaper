@@ -1,0 +1,83 @@
+#!/bin/bash
+
+rofi_command='rofi -theme themes/wallpaper.rasi'
+
+# Variable passed to rofi
+options=("random"
+    "random from latest"
+    "random from most viewed"
+    "random from toplist"
+    "random from favorites"
+    "random and blurred"
+    "random from saved"
+    "keep wallpaper")
+
+chosen="$(printf '%s\n' "${options[@]}" | $rofi_command -p "wallpaper" -dmenu -selected-row 2)"
+
+# Image folder location
+img_dir="$HOME/Pictures"
+
+# Wallpapers folder location
+wallpapers_dir="$img_dir/wallpapers"
+
+# Wallhaven folder location
+wallhaven_dir="$img_dir/wallhaven.cc"
+
+# Wallpaper
+wallpaper="$img_dir/wallpaper.jpg"
+
+# Resolution
+resolution="3840x2160"
+
+case $chosen in
+"random")
+    img=$(swd -l "$wallhaven_dir" -a "$resolution")
+    ln -sf "$img" "$wallpaper" && hsetroot -fill "$wallpaper"
+    ;;
+"random from latest")
+    img=$(swd -l "$wallhaven_dir" -s latest -a "$resolution")
+    ln -sf "$img" "$wallpaper" && hsetroot -fill "$wallpaper"
+    ;;
+"random from most viewed")
+    img=$(swd -l "$wallhaven_dir" -s views -a "$resolution")
+    ln -sf "$img" "$wallpaper" && hsetroot -fill "$wallpaper"
+    ;;
+"random from toplist")
+    img=$(swd -l "$wallhaven_dir" -s toplist -a "$resolution")
+    ln -sf "$img" "$wallpaper" && hsetroot -fill "$wallpaper"
+    ;;
+"random from favorites")
+    img=$(swd -l "$wallhaven_dir" -s favorites -a "$resolution")
+    ln -sf "$img" "$wallpaper" && hsetroot -fill "$wallpaper"
+    ;;
+"random and blurred")
+    img=$(swd -l "$wallhaven_dir")
+    convert -blur 0x80 "$img" "$img"
+    ln -sf "$img" "$wallpaper" && hsetroot -fill "$wallpaper"
+    ;;
+"random from saved")
+    mapfile -t wallpapers < <(find "$wallpapers_dir" -type f)
+    ln -sf "${wallpapers[$(("$RANDOM" % ${#wallpapers[@]}))]}" "$wallpaper"
+    hsetroot -fill "$wallpaper"
+    ;;
+"keep wallpaper")
+    # Получаем путь текущего изображения
+    current_wallpaper="$(readlink -f "$wallpaper")"
+
+    PATTERN="$wallpapers_dir/*${current_wallpaper##*/}"
+
+    # Проверяем имеется ли такое изображение
+    if compgen -G "$PATTERN" >/dev/null; then
+        notify-send -u critical "Image already exists"
+    else
+        mkdir -p "$wallpapers_dir"
+
+        # Name of image
+        img="$(date +%y%m%d-%H%M%S)-${current_wallpaper##*/}"
+
+        # Copy the wallpaper image to archive folder
+        cp "$current_wallpaper" "$wallpapers_dir/$img"
+        notify-send "$img saved"
+    fi
+    ;;
+esac

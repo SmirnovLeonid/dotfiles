@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Что делает этот скрипт:
+# - Позволяет быстро запускать часто используемые команды
+
+# data - должна хранить путь к command.json 
+
+# стуркура command.json
+
+# [
+#   {
+#     "name": "Подключиться к INET STUD",
+#     "commands": [
+#       {
+#         "app": "nmcli",
+#         "arguments": ["con up InetStud"]
+#       }
+#     ]
+#   },
+#   {
+#     "name": "cd itp",
+#     "commands": [
+#       {
+#         "app": "alacritty",
+#         "arguments": [
+#           "--working-directory /home/max/work/itp",
+#           "-e zsh"
+#         ]
+#       }
+#     ]
+#   },
+# ]
+
+rofi_command='rofi -theme themes/command.rasi'
+
+data="$APP_DATA/rofi/command.json"
+
+# Variable passed to rofi
+options="$(jq -r '.[].name' "$data")"
+
+chosen="$(echo -e "$options" | $rofi_command -p "commands" -dmenu)"
+
+[[ -z "$chosen" ]] && exit 1
+
+commands=$(jq -r ".[] | select(.name==\"$chosen\") .commands" "$data")
+
+for i in $(echo "${commands}" | jq -r '.[] | @base64'); do
+    command=$(echo "${i}" | base64 --decode | jq -r ".app")
+    arguments=$(echo "${i}" | base64 --decode | jq -r ".arguments")
+
+    for j in $(echo "$arguments" | jq -r '.[] | @base64'); do
+        command+=" "
+        command+=$(echo "$j" | base64 --decode)
+    done
+
+    $command &
+done

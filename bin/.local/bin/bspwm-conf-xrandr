@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Что делает этот скрипт:
+# - Настраивает расположение внешних мониторов, если они подключены
+
+edp="eDP1"
+hdmi="HDMI-1-0"
+
+connected_monitors="$(xrandr --query | grep -cw 'connected')"
+
+if [ "$connected_monitors" -eq "2" ]; then
+    xrandr --output "$edp" --auto --pos 960x2160 --output "$hdmi" --auto --pos 0x0
+fi

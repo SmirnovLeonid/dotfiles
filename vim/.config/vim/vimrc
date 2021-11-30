@@ -1,0 +1,46 @@
+syntax on
+set relativenumber
+set number
+set mouse+=a
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set hlsearch
+set incsearch
+set autoindent
+set viminfo+=n~/.config/vim/viminfo
+
+nnoremap <C-Left> :tabprevious<CR>
+noremap <C-Right> :tabnext<CR>
+
+
+call plug#begin('~/.config/vim/pluggins')
+
+Plug 'itchyny/lightline.vim'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'kien/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'ervandew/supertab'
+Plug 'lilydjwg/colorizer'
+Plug 'jiangmiao/auto-pairs'
+Plug 'joshdick/onedark.vim'
+Plug 'vim-scripts/LargeFile'
+
+call plug#end()
+
+" for plugin -> tchyny/lightline.vim
+set laststatus=2
+set noshowmode
+
+" for plugin -> preservim/nerdtree
+map <C-n> :NERDTreeToggle<CR>
+
+" for plugin -> easymotion/vim-easymotion
+map <Leader> <Plug>(easymotion-prefix)
+
+" for plugin -> joshdick/onedark.vim
+colorscheme onedark
+
+
+

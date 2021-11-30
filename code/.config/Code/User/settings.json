@@ -1,0 +1,114 @@
+{
+    "editor.fontFamily": "'JetBrains Mono', 'monospace', 'Droid Sans Fallback', 'Material Design Icons', 'Typicons', 'FontAwesome', 'Noto Color Emoji'",
+    "files.autoSave": "onFocusChange",
+    "workbench.sideBar.location": "left",
+    "breadcrumbs.enabled": true,
+    "editor.renderWhitespace": "none",
+    "workbench.startupEditor": "newUntitledFile",
+    "explorer.confirmDelete": false,
+    "explorer.compactFolders": false,
+    "editor.rulers": [
+        60,
+        80,
+        120
+    ],
+    "workbench.iconTheme": "vscode-icons",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.tabSize": 2,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "security.workspace.trust.enabled": false,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "attrsSorter.order": [
+        "is",
+        "v-for",
+        "v-if",
+        "v-else-if",
+        "v-else",
+        "v-show",
+        "v-cloak",
+        "v-once",
+        "v-pre",
+        "id",
+        "ref",
+        "key",
+        "v-slot",
+        "v-slot.+",
+        "#.*",
+        "slot",
+        "v-model",
+        "v-model.+",
+        "v-bind",
+        "v-bind.+",
+        ":.+",
+        "v-text",
+        "v-text.+",
+        "v-html",
+        "v-html.+",
+        "class",
+        "v-on.+",
+        "@.+",
+        "name",
+        "data-.+",
+        "ng-.+",
+        "src",
+        "for",
+        "type",
+        "href",
+        "values",
+        "title",
+        "alt",
+        "role",
+        "aria-.+",
+        "$unknown$"
+      ],
+      "todohighlight.isEnable": true,
+      "todohighlight.include": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.php",
+        "**/*.css",
+        "**/*.sass",
+        "**/*.scss",
+        "**/*.vue"
+    ],
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[nginx]": {
+        "editor.defaultFormatter": "raynigon.nginx-formatter"
+    },
+    "docker.languageserver.formatter.ignoreMultilineInstructions": true,
+    "prettier.printWidth": 120,
+     // For which languages indent-rainbow should be activated (if empty it means all).
+    "indentRainbow.includedLanguages": [
+        "html",
+        "vue",
+        "js"
+    ],
+    "workbench.colorTheme": "One Dark Pro",
+    "window.zoomLevel": 1, // for example ["nim", "nims", "python"]
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+          "path": "bash"
+        },
+        "zsh": {
+          "path": "/usr/bin/zsh"
+        }
+},
+}
