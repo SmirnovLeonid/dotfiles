@@ -101,14 +101,12 @@
         "vue",
         "js"
     ],
-    "workbench.colorTheme": "One Dark Pro",
-    "window.zoomLevel": 3, // for example ["nim", "nims", "python"]
-    "terminal.integrated.profiles.linux": {
-        "bash": {
-          "path": "bash"
-        },
-        "zsh": {
-          "path": "/usr/bin/zsh"
-        }
-},
+    "workbench.colorTheme": "One Dark Pro", // for example ["nim", "nims", "python"]
+    "terminal.integrated.persistentSessionReviveProcess": "never",
+    "editor.linkedEditing": true,
+    "editor.unicodeHighlight.allowedCharacters": {
+        "о": true,
+        "р": true
+    },
+    "editor.unicodeHighlight.ambiguousCharacters": false
 }
